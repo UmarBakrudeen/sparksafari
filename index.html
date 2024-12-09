@@ -3,6 +3,54 @@
   <plasmo-csui></plasmo-csui
   ><head>
     <style>
+      form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .form-group {
+        flex: 0 0 48%;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #estimateResult {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+    <style>
       .pac-container {
         background-color: #fff;
         position: absolute !important;
@@ -2621,401 +2669,151 @@
                                               _ngcontent-serverapp-c26=""
                                               class="formbg-inner padding-horizontal--48"
                                             >
-                                              <form
-                                                _ngcontent-serverapp-c26=""
-                                                novalidate=""
-                                                id="stripe-login"
-                                                class="ng-untouched ng-pristine ng-invalid"
-                                              >
-                                                <mat-radio-group
-                                                  _ngcontent-serverapp-c26=""
-                                                  role="radiogroup"
-                                                  aria-label="Select an option"
-                                                  formcontrolname="tripType"
-                                                  class="mat-mdc-radio-group ng-untouched ng-pristine ng-valid"
-                                                  style="display: inline-block"
-                                                  ><mat-radio-button
-                                                    _ngcontent-serverapp-c26=""
-                                                    value="One Way"
-                                                    class="mat-mdc-radio-button mat-accent mat-mdc-radio-checked"
-                                                    style="margin-right: 10px"
-                                                    id="mat-radio-2"
-                                                    ><div
-                                                      class="mdc-form-field"
-                                                    >
-                                                      <div class="mdc-radio">
-                                                        <div
-                                                          class="mat-mdc-radio-touch-target"
-                                                        ></div>
-                                                        <input
-                                                          type="radio"
-                                                          class="mdc-radio__native-control"
-                                                          id="mat-radio-2-input"
-                                                          name="mat-radio-group-0"
-                                                          value="One Way"
-                                                          tabindex="0"
-                                                        />
-                                                        <div
-                                                          class="mdc-radio__background"
-                                                        >
-                                                          <div
-                                                            class="mdc-radio__outer-circle"
-                                                          ></div>
-                                                          <div
-                                                            class="mdc-radio__inner-circle"
-                                                          ></div>
-                                                        </div>
-                                                        <div
-                                                          mat-ripple=""
-                                                          class="mat-ripple mat-radio-ripple mat-mdc-focus-indicator"
-                                                        >
-                                                          <div
-                                                            class="mat-ripple-element mat-radio-persistent-ripple"
-                                                          ></div>
-                                                        </div>
-                                                      </div>
-                                                      <label
-                                                        for="mat-radio-2-input"
-                                                        >One Way
-                                                      </label>
-                                                    </div></mat-radio-button
-                                                  ><mat-radio-button
-                                                    _ngcontent-serverapp-c26=""
-                                                    value="Round Trip"
-                                                    class="mat-mdc-radio-button mat-accent"
-                                                    id="mat-radio-3"
-                                                    ><div
-                                                      class="mdc-form-field"
-                                                    >
-                                                      <div class="mdc-radio">
-                                                        <div
-                                                          class="mat-mdc-radio-touch-target"
-                                                        ></div>
-                                                        <input
-                                                          type="radio"
-                                                          class="mdc-radio__native-control"
-                                                          id="mat-radio-3-input"
-                                                          name="mat-radio-group-0"
-                                                          value="Round Trip"
-                                                          tabindex="-1"
-                                                        />
-                                                        <div
-                                                          class="mdc-radio__background"
-                                                        >
-                                                          <div
-                                                            class="mdc-radio__outer-circle"
-                                                          ></div>
-                                                          <div
-                                                            class="mdc-radio__inner-circle"
-                                                          ></div>
-                                                        </div>
-                                                        <div
-                                                          mat-ripple=""
-                                                          class="mat-ripple mat-radio-ripple mat-mdc-focus-indicator"
-                                                        >
-                                                          <div
-                                                            class="mat-ripple-element mat-radio-persistent-ripple"
-                                                          ></div>
-                                                        </div>
-                                                      </div>
-                                                      <label
-                                                        for="mat-radio-3-input"
-                                                        >Round Trip
-                                                      </label>
-                                                    </div></mat-radio-button
-                                                  ></mat-radio-group
-                                                >
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="grid--50-50"
-                                                >
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                  >
+                                              <!-- New -->
+                                              <form id="taxiForm">
+                                                <div class="form-row">
+                                                  <div class="form-group">
+                                                    <label>One Way</label>
                                                     <input
-                                                      _ngcontent-serverapp-c26=""
-                                                      placeholder="Full name"
-                                                      formcontrolname="name"
-                                                      class="ng-untouched ng-pristine ng-invalid"
-                                                    /><!---->
-                                                  </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                  >
-                                                    <input
-                                                      _ngcontent-serverapp-c26=""
-                                                      placeholder="Mobile number"
-                                                      formcontrolname="phone"
-                                                      class="ng-untouched ng-pristine ng-invalid"
-                                                    /><!---->
-                                                  </div>
-                                                </div>
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="grid--100"
-                                                >
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                  >
-                                                    <input
-                                                      _ngcontent-serverapp-c26=""
-                                                      placeholder="Pickup location"
-                                                      class="pac-target-input"
-                                                      autocomplete="off"
+                                                      type="radio"
+                                                      id="oneWay"
+                                                      name="tripType"
+                                                      value="One Way"
+                                                      checked
                                                     />
                                                   </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                  >
+                                                  <div class="form-group">
+                                                    <label for="oneWay"
+                                                      >Round Trip</label
+                                                    >
                                                     <input
-                                                      _ngcontent-serverapp-c26=""
-                                                      placeholder="Drop location"
-                                                      class="pac-target-input"
-                                                      autocomplete="off"
+                                                      type="radio"
+                                                      id="roundTrip"
+                                                      name="tripType"
+                                                      value="Round Trip"
                                                     />
                                                   </div>
                                                 </div>
-                                                <agm-map
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="hide"
-                                                  _nghost-serverapp-c2=""
-                                                  ><div
-                                                    _ngcontent-serverapp-c2=""
-                                                    class="agm-map-container-inner sebm-google-map-container-inner"
-                                                  >
-                                                    <div
-                                                      style="
-                                                        height: 100%;
-                                                        width: 100%;
-                                                      "
+
+                                                <div class="form-row">
+                                                  <div class="form-group">
+                                                    <label for="name"
+                                                      >Name</label
                                                     >
-                                                      <div
-                                                        style="overflow: hidden"
-                                                      ></div>
-                                                    </div>
+                                                    <input
+                                                      type="text"
+                                                      id="name"
+                                                      name="name"
+                                                      required
+                                                    />
                                                   </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c2=""
-                                                    class="agm-map-content"
-                                                  >
-                                                    <!---->
-                                                  </div></agm-map
-                                                >
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="grid--50-50"
-                                                >
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                    style="
-                                                      position: relative;
-                                                      top: -15px;
-                                                    "
-                                                  >
-                                                    <label
-                                                      _ngcontent-serverapp-c26=""
-                                                      for="pickupDate"
+                                                  <div class="form-group">
+                                                    <label for="phone"
+                                                      >Phone</label
+                                                    >
+                                                    <input
+                                                      type="tel"
+                                                      id="phone"
+                                                      name="phone"
+                                                      required
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div class="form-row">
+                                                  <div class="form-group">
+                                                    <label for="pickup"
+                                                      >Pickup Location</label
+                                                    >
+                                                    <input
+                                                      type="text"
+                                                      id="pickup"
+                                                      name="pickup"
+                                                      placeholder="e.g., Chennai"
+                                                      required
+                                                    />
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="drop"
+                                                      >Drop Location</label
+                                                    >
+                                                    <input
+                                                      type="text"
+                                                      id="drop"
+                                                      name="drop"
+                                                      placeholder="e.g., Coimbatore"
+                                                      required
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div class="form-row">
+                                                  <div class="form-group">
+                                                    <label for="pickupDate"
                                                       >Pickup Date</label
                                                     >
                                                     <input
-                                                      _ngcontent-serverapp-c26=""
-                                                      formcontrolname="pickupDate"
-                                                      matInput
-                                                      [matDatepicker]="picker"
-                                                      placeholder="Pickup date"
-                                                      readonly=""
-                                                      class="mat-datepicker-input ng-untouched ng-pristine ng-valid"
-                                                      aria-haspopup="dialog"
-                                                      min="2024-10-22"
+                                                      type="date"
+                                                      id="pickupDate"
+                                                      name="pickupDate"
+                                                      required
                                                     />
-                                                    <mat-datepicker-toggle
-                                                      matSuffix
-                                                      [for]="picker"
-                                                    ></mat-datepicker-toggle>
-                                                    <mat-datepicker
-                                                      #picker
-                                                    ></mat-datepicker>
                                                   </div>
-
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="field padding-bottom--24"
-                                                  >
-                                                    <label
-                                                      _ngcontent-serverapp-c26=""
-                                                      for="fullName"
+                                                  <div class="form-group">
+                                                    <label for="pickupTime"
                                                       >Pickup Time</label
-                                                    ><mat-select
-                                                      _ngcontent-serverapp-c26=""
-                                                      role="combobox"
-                                                      aria-autocomplete="none"
-                                                      aria-haspopup="listbox"
-                                                      formcontrolname="pickupTime"
-                                                      placeholder="Time"
-                                                      class="mat-mdc-select form-control time-select ng-tns-c9-1 mat-mdc-select-required mat-mdc-select-empty ng-untouched ng-pristine ng-valid ng-star-inserted"
-                                                      aria-labelledby="mat-select-value-1"
-                                                      id="mat-select-0"
-                                                      tabindex="0"
-                                                      aria-expanded="false"
-                                                      aria-required="true"
-                                                      aria-disabled="false"
-                                                      aria-invalid="false"
-                                                      ><div
-                                                        cdk-overlay-origin=""
-                                                        class="mat-mdc-select-trigger ng-tns-c9-1"
-                                                      >
-                                                        <div
-                                                          class="mat-mdc-select-value ng-tns-c9-1"
-                                                          id="mat-select-value-1"
-                                                        >
-                                                          <span
-                                                            class="mat-mdc-select-placeholder mat-mdc-select-min-line ng-tns-c9-1 ng-star-inserted"
-                                                            >Time</span
-                                                          ><!----><!---->
-                                                        </div>
-                                                        <div
-                                                          class="mat-mdc-select-arrow-wrapper ng-tns-c9-1"
-                                                        >
-                                                          <div
-                                                            class="mat-mdc-select-arrow ng-tns-c9-1"
-                                                          >
-                                                            <svg
-                                                              viewBox="0 0 24 24"
-                                                              width="24px"
-                                                              height="24px"
-                                                              focusable="false"
-                                                              class="ng-tns-c9-1"
-                                                            >
-                                                              <path
-                                                                d="M7 10l5 5 5-5z"
-                                                                class="ng-tns-c9-1"
-                                                              ></path>
-                                                            </svg>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <!----></mat-select
-                                                    ><!---->
+                                                    >
+                                                    <input
+                                                      type="time"
+                                                      id="pickupTime"
+                                                      name="pickupTime"
+                                                      required
+                                                    />
                                                   </div>
                                                 </div>
-                                                <!---->
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="clear"
-                                                ></div>
-                                                <label
-                                                  _ngcontent-serverapp-c26=""
-                                                  style="margin-bottom: 0"
-                                                  >Please select your cab
-                                                  type</label
-                                                >
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="carbox"
-                                                >
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="col ng-star-inserted"
-                                                  >
-                                                    <div
-                                                      _ngcontent-serverapp-c26=""
-                                                      class="cars-item"
+                                                <div class="form-row">
+                                                  <div class="form-group">
+                                                    <label for="cabType"
+                                                      >Please Select Your Cab
+                                                      Type</label
                                                     >
-                                                      <label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >14 ₹ / Km</label
-                                                      ><img
-                                                        _ngcontent-serverapp-c26=""
-                                                        src="https://images.ctfassets.net/509kpi6dw56l/6QdZLGkGnMv0F8fDwFMGlE/1b85e10c7d90fdac89a4794938a43780/prime-play-1.png?h=250"
-                                                        class="ng-star-inserted"
-                                                      /><!----><!----><label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >SEDAN</label
-                                                      >
-                                                    </div>
-                                                  </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="col ng-star-inserted"
-                                                  >
-                                                    <div
-                                                      _ngcontent-serverapp-c26=""
-                                                      class="cars-item"
+                                                    <select
+                                                      id="cabType"
+                                                      name="cabType"
+                                                      required
                                                     >
-                                                      <label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >14 ₹ / Km</label
-                                                      ><img
-                                                        _ngcontent-serverapp-c26=""
-                                                        src="https://images.ctfassets.net/509kpi6dw56l/7s8MKkYx4bSfPYlrqUEAW5/c23e3f9a5f9ebbbca681d63f0e8b8130/lux-1.png?h=250"
-                                                        class="ng-star-inserted"
-                                                      /><!----><!----><label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >ETIOS</label
-                                                      >
-                                                    </div>
+                                                      <option value="">
+                                                        --Select Cab Type--
+                                                      </option>
+                                                      <option value="SEDAN">
+                                                        SEDAN (₹14/KM)
+                                                      </option>
+                                                      <option value="ETIOS">
+                                                        ETIOS (₹19/KM)
+                                                      </option>
+                                                      <option value="SUV">
+                                                        SUV (₹20/KM)
+                                                      </option>
+                                                      <option value="INNOVA">
+                                                        INNOVA (₹25/KM)
+                                                      </option>
+                                                    </select>
                                                   </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="col ng-star-inserted"
-                                                  >
-                                                    <div
-                                                      _ngcontent-serverapp-c26=""
-                                                      class="cars-item"
-                                                    >
-                                                      <label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >19 ₹ / Km</label
-                                                      ><img
-                                                        _ngcontent-serverapp-c26=""
-                                                        src="https://images.ctfassets.net/509kpi6dw56l/ZV8ALWfK2zWiQLJ2gep4N/010ed551e2211627602d6d6e3f1f4364/lux-1__2_.png?h=250"
-                                                        class="ng-star-inserted"
-                                                      /><!----><!----><label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >SUV</label
-                                                      >
-                                                    </div>
-                                                  </div>
-                                                  <div
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="col ng-star-inserted"
-                                                  >
-                                                    <div
-                                                      _ngcontent-serverapp-c26=""
-                                                      class="cars-item"
-                                                    >
-                                                      <label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >20 ₹ / Km</label
-                                                      ><img
-                                                        _ngcontent-serverapp-c26=""
-                                                        src="https://images.ctfassets.net/509kpi6dw56l/72yoz2W0gPFPq50SfgPPqU/2c521cd2260cff9246ea2955bc37b707/prime-suv-1.png?h=250"
-                                                        class="ng-star-inserted"
-                                                      /><!----><!----><label
-                                                        _ngcontent-serverapp-c26=""
-                                                        >INNOVA</label
-                                                      >
-                                                    </div>
-                                                  </div>
-                                                  <!---->
                                                 </div>
-                                                <div
-                                                  _ngcontent-serverapp-c26=""
-                                                  class="field padding-bottom--24"
+                                                <button
+                                                  type="button"
+                                                  id="getEstimate"
                                                 >
-                                                  <button
-                                                    _ngcontent-serverapp-c26=""
-                                                    class="booking"
-                                                  >
-                                                    Get Estimate
-                                                  </button>
-                                                </div>
+                                                  Get Estimate
+                                                </button>
                                               </form>
+
+                                              <p
+                                                id="estimateResult"
+                                                style="
+                                                  margin-top: 20px;
+                                                  font-size: 18px;
+                                                  font-weight: bold;
+                                                "
+                                              ></p>
                                             </div>
                                           </div>
                                         </div>
@@ -4263,5 +4061,57 @@
         top: 1046px;
       "
     ></div>
+
+    <script>
+      // Hardcoded distances between Tamil Nadu districts (in km)
+      const distanceMatrix = {
+        Chennai: { Coimbatore: 510, Madurai: 465, Trichy: 325 },
+        Coimbatore: { Chennai: 510, Madurai: 215, Trichy: 215 },
+        Madurai: { Chennai: 465, Coimbatore: 215, Trichy: 135 },
+        Trichy: { Chennai: 325, Coimbatore: 215, Madurai: 135 },
+      };
+
+      // Fare rates per KM
+      const fareRates = {
+        SEDAN: 14,
+        ETIOS: 19,
+        SUV: 20,
+        INNOVA: 25,
+      };
+
+      document
+        .getElementById("getEstimate")
+        .addEventListener("click", function () {
+          const pickup = document.getElementById("pickup").value.trim();
+          const drop = document.getElementById("drop").value.trim();
+          const tripType = document.querySelector(
+            'input[name="tripType"]:checked'
+          ).value;
+          const cabType = document.getElementById("cabType").value;
+
+          if (!pickup || !drop || !cabType) {
+            alert("Please fill all fields!");
+            return;
+          }
+
+          // Get distance
+          const distance = distanceMatrix[pickup]?.[drop];
+          if (!distance) {
+            alert("Distance between these locations is not available!");
+            return;
+          }
+
+          // Calculate fare
+          const baseFare = fareRates[cabType];
+          const tripMultiplier = tripType === "Round Trip" ? 2 : 1;
+          const estimate = baseFare * distance * tripMultiplier;
+
+          document.getElementById(
+            "estimateResult"
+          ).innerText = `Distance: ${distance} km | Estimated Fare: ₹${estimate.toFixed(
+            2
+          )}`;
+        });
+    </script>
   </body>
 </html>
