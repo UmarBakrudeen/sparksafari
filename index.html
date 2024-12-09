@@ -4149,7 +4149,9 @@
           // Get distance from the hardcoded distance matrix
           const distance = distanceMatrix[pickup]?.[drop];
           if (!distance) {
-            alert("Distance between these locations is not available!");
+            alert(
+              "Distance between these locations is not available! For any enquiries, please contact: 9344105565"
+            );
             return;
           }
 
@@ -4163,7 +4165,7 @@
             "estimateResult"
           ).innerText = `From: ${pickup} to ${drop} | Distance: ${distance} km | Estimated Fare: ₹${estimate.toFixed(
             2
-          )}`;
+          )} | For verification, contact: 9344105565`;
         });
     </script>
   </body>
