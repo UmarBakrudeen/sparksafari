@@ -3,6 +3,20 @@
   <plasmo-csui></plasmo-csui
   ><head>
     <style>
+      .trip-type {
+        display: flex;
+        align-items: center;
+        gap: 1px; /* Adds space between the radio buttons */
+      }
+
+      .trip-type label {
+        margin-left: 5px; /* Adds some space between the label and the radio button */
+      }
+
+      .trip-type input {
+        margin: 0; /* Removes default margin for better alignment */
+      }
+
       form {
         max-width: 600px;
         margin: auto;
@@ -2671,149 +2685,186 @@
                                             >
                                               <!-- New -->
                                               <form id="taxiForm">
-                                                <div class="form-row">
-                                                  <div class="form-group">
-                                                    <label>One Way</label>
-                                                    <input
-                                                      type="radio"
-                                                      id="oneWay"
-                                                      name="tripType"
-                                                      value="One Way"
-                                                      checked
-                                                    />
-                                                  </div>
-                                                  <div class="form-group">
-                                                    <label for="oneWay"
-                                                      >Round Trip</label
-                                                    >
-                                                    <input
-                                                      type="radio"
-                                                      id="roundTrip"
-                                                      name="tripType"
-                                                      value="Round Trip"
-                                                    />
-                                                  </div>
+                                                <!-- Trip Type -->
+                                                <div
+                                                  class="form-group trip-type"
+                                                >
+                                                  <label>Trip Type</label>
+                                                  <input
+                                                    type="radio"
+                                                    id="oneWay"
+                                                    name="tripType"
+                                                    value="One Way"
+                                                    checked
+                                                  />
+                                                  <label for="oneWay"
+                                                    >One Way</label
+                                                  >
+
+                                                  <input
+                                                    type="radio"
+                                                    id="roundTrip"
+                                                    name="tripType"
+                                                    value="Round Trip"
+                                                  />
+                                                  <label for="roundTrip"
+                                                    >Round Trip</label
+                                                  >
                                                 </div>
 
-                                                <div class="form-row">
-                                                  <div class="form-group">
-                                                    <label for="name"
-                                                      >Name</label
-                                                    >
-                                                    <input
-                                                      type="text"
-                                                      id="name"
-                                                      name="name"
-                                                      required
-                                                    />
-                                                  </div>
-                                                  <div class="form-group">
-                                                    <label for="phone"
-                                                      >Phone</label
-                                                    >
-                                                    <input
-                                                      type="tel"
-                                                      id="phone"
-                                                      name="phone"
-                                                      required
-                                                    />
-                                                  </div>
+                                                <!-- Name and Phone -->
+                                                <div class="form-group">
+                                                  <label for="name">Name</label>
+                                                  <input
+                                                    type="text"
+                                                    id="name"
+                                                    name="name"
+                                                    required
+                                                  />
                                                 </div>
+                                                <div class="form-group">
+                                                  <label for="phone"
+                                                    >Phone</label
+                                                  >
+                                                  <input
+                                                    type="tel"
+                                                    id="phone"
+                                                    name="phone"
+                                                    required
+                                                  />
+                                                </div>
+
+                                                <!-- Pickup and Drop Location (in one row) -->
                                                 <div class="form-row">
                                                   <div class="form-group">
                                                     <label for="pickup"
                                                       >Pickup Location</label
                                                     >
-                                                    <input
-                                                      type="text"
+                                                    <select
                                                       id="pickup"
                                                       name="pickup"
-                                                      placeholder="e.g., Chennai"
                                                       required
-                                                    />
+                                                    >
+                                                      <option value="">
+                                                        --Select Pickup
+                                                        Location--
+                                                      </option>
+                                                      <option value="Chennai">
+                                                        Chennai
+                                                      </option>
+                                                      <option
+                                                        value="Coimbatore"
+                                                      >
+                                                        Coimbatore
+                                                      </option>
+                                                      <option value="Madurai">
+                                                        Madurai
+                                                      </option>
+                                                      <option value="Trichy">
+                                                        Trichy
+                                                      </option>
+                                                      <option value="Salem">
+                                                        Salem
+                                                      </option>
+                                                    </select>
                                                   </div>
                                                   <div class="form-group">
                                                     <label for="drop"
                                                       >Drop Location</label
                                                     >
-                                                    <input
-                                                      type="text"
+                                                    <select
                                                       id="drop"
                                                       name="drop"
-                                                      placeholder="e.g., Coimbatore"
-                                                      required
-                                                    />
-                                                  </div>
-                                                </div>
-                                                <div class="form-row">
-                                                  <div class="form-group">
-                                                    <label for="pickupDate"
-                                                      >Pickup Date</label
-                                                    >
-                                                    <input
-                                                      type="date"
-                                                      id="pickupDate"
-                                                      name="pickupDate"
-                                                      required
-                                                    />
-                                                  </div>
-                                                  <div class="form-group">
-                                                    <label for="pickupTime"
-                                                      >Pickup Time</label
-                                                    >
-                                                    <input
-                                                      type="time"
-                                                      id="pickupTime"
-                                                      name="pickupTime"
-                                                      required
-                                                    />
-                                                  </div>
-                                                </div>
-                                                <div class="form-row">
-                                                  <div class="form-group">
-                                                    <label for="cabType"
-                                                      >Please Select Your Cab
-                                                      Type</label
-                                                    >
-                                                    <select
-                                                      id="cabType"
-                                                      name="cabType"
                                                       required
                                                     >
                                                       <option value="">
-                                                        --Select Cab Type--
+                                                        --Select Drop Location--
                                                       </option>
-                                                      <option value="SEDAN">
-                                                        SEDAN (₹14/KM)
+                                                      <option value="Chennai">
+                                                        Chennai
                                                       </option>
-                                                      <option value="ETIOS">
-                                                        ETIOS (₹19/KM)
+                                                      <option
+                                                        value="Coimbatore"
+                                                      >
+                                                        Coimbatore
                                                       </option>
-                                                      <option value="SUV">
-                                                        SUV (₹20/KM)
+                                                      <option value="Madurai">
+                                                        Madurai
                                                       </option>
-                                                      <option value="INNOVA">
-                                                        INNOVA (₹25/KM)
+                                                      <option value="Trichy">
+                                                        Trichy
+                                                      </option>
+                                                      <option value="Salem">
+                                                        Salem
                                                       </option>
                                                     </select>
                                                   </div>
                                                 </div>
+
+                                                <!-- Pickup Date and Time -->
+                                                <div class="form-group">
+                                                  <label for="pickupDate"
+                                                    >Pickup Date</label
+                                                  >
+                                                  <input
+                                                    type="date"
+                                                    id="pickupDate"
+                                                    name="pickupDate"
+                                                    required
+                                                  />
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="pickupTime"
+                                                    >Pickup Time</label
+                                                  >
+                                                  <input
+                                                    type="time"
+                                                    id="pickupTime"
+                                                    name="pickupTime"
+                                                    required
+                                                  />
+                                                </div>
+
+                                                <!-- Cab Type -->
+                                                <div class="form-group">
+                                                  <label for="cabType"
+                                                    >Please select your cab
+                                                    type</label
+                                                  >
+                                                  <select
+                                                    id="cabType"
+                                                    name="cabType"
+                                                    required
+                                                  >
+                                                    <option value="">
+                                                      --Select Cab Type--
+                                                    </option>
+                                                    <option value="SEDAN">
+                                                      SEDAN
+                                                    </option>
+                                                    <option value="ETIOS">
+                                                      ETIOS
+                                                    </option>
+                                                    <option value="SUV">
+                                                      SUV
+                                                    </option>
+                                                    <option value="INNOVA">
+                                                      INNOVA
+                                                    </option>
+                                                  </select>
+                                                </div>
+
+                                                <!-- Estimate Button -->
                                                 <button
                                                   type="button"
                                                   id="getEstimate"
+                                                  style="margin-top: 15px"
                                                 >
                                                   Get Estimate
                                                 </button>
                                               </form>
 
-                                              <p
-                                                id="estimateResult"
-                                                style="
-                                                  margin-top: 20px;
-                                                  font-size: 18px;
-                                                  font-weight: bold;
-                                                "
-                                              ></p>
+                                              <p id="estimateResult"></p>
                                             </div>
                                           </div>
                                         </div>
@@ -4065,10 +4116,11 @@
     <script>
       // Hardcoded distances between Tamil Nadu districts (in km)
       const distanceMatrix = {
-        Chennai: { Coimbatore: 510, Madurai: 465, Trichy: 325 },
-        Coimbatore: { Chennai: 510, Madurai: 215, Trichy: 215 },
-        Madurai: { Chennai: 465, Coimbatore: 215, Trichy: 135 },
-        Trichy: { Chennai: 325, Coimbatore: 215, Madurai: 135 },
+        Chennai: { Coimbatore: 510, Madurai: 465, Trichy: 350, Salem: 345 },
+        Coimbatore: { Chennai: 510, Madurai: 215, Trichy: 215, Salem: 150 },
+        Madurai: { Chennai: 465, Coimbatore: 215, Trichy: 135, Salem: 250 },
+        Trichy: { Chennai: 350, Coimbatore: 215, Madurai: 135, Salem: 145 },
+        Salem: { Chennai: 345, Coimbatore: 150, Madurai: 250, Trichy: 145 },
       };
 
       // Fare rates per KM
@@ -4094,7 +4146,7 @@
             return;
           }
 
-          // Get distance
+          // Get distance from the hardcoded distance matrix
           const distance = distanceMatrix[pickup]?.[drop];
           if (!distance) {
             alert("Distance between these locations is not available!");
@@ -4106,9 +4158,10 @@
           const tripMultiplier = tripType === "Round Trip" ? 2 : 1;
           const estimate = baseFare * distance * tripMultiplier;
 
+          // Display the result
           document.getElementById(
             "estimateResult"
-          ).innerText = `Distance: ${distance} km | Estimated Fare: ₹${estimate.toFixed(
+          ).innerText = `From: ${pickup} to ${drop} | Distance: ${distance} km | Estimated Fare: ₹${estimate.toFixed(
             2
           )}`;
         });
