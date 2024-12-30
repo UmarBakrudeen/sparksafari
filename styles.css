@@ -4928,3 +4928,130 @@ mat-radio-group {
 .sidebar-gallery .gallery-thumb img {
   width: 100%;
 }
+/* New Header Menus */
+.custom-navbar {
+  background-color: transparent;
+  padding: 0;
+}
+
+.custom-nav-link {
+  color: #fecc18 !important;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  transition: color 0.3s ease-in-out;
+}
+
+.custom-nav-link:hover {
+  color: #fff !important;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-color: #fecc18; /* White Toggler Icon */
+}
+
+/* Adjust Dropdown Colors (if any) */
+.navbar-nav .dropdown-menu {
+  background-color: #1a1a2e; /* Same as navbar background */
+  border: none;
+}
+
+.navbar-nav .dropdown-item {
+  color: #fecc18;
+}
+
+.navbar-nav .dropdown-item:hover {
+  color: #00a8cc;
+  background-color: transparent;
+}
+button:hover {
+  background-color: #fecc18;
+}
+
+/* Footer custom */
+.footer-div {
+  background-color: #3d3e3e;
+  padding: 40px 0;
+  color: #fff;
+}
+
+.footer-shape {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-text {
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.helpline h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.footer-navigation ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-navigation ul li {
+  margin-bottom: 10px;
+}
+
+.footer-navigation ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-navigation ul li a:hover {
+  text-decoration: underline;
+}
+
+.social-nav {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  justify-content: start;
+  padding: 0;
+}
+
+.social-nav li a {
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-nav li a:hover {
+  color: #007bff;
+}
+
+.copyright-div {
+  text-align: center;
+  font-size: 14px;
+}
+.copyright-div a {
+  color: #fecc18;
+}
+/* Tariff Table */
+
+.table-new {
+  width: 100%;
+}
+.table-head-body th {
+  padding: 10px 15px;
+  background-color: #fecc18;
+  color: #fff;
+  border: 1px solid #ddd;
+}
+.table-head-body td {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+}

@@ -1,29 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <plasmo-csui></plasmo-csui
-  ><head>
+  <plasmo-csui></plasmo-csui>
+  <head>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .trip-type {
+        display: flex;
+        align-items: center;
+        gap: 1px; /* Adds space between the radio buttons */
+      }
+
+      .trip-type label {
+        margin-left: 5px; /* Adds some space between the label and the radio button */
+      }
+
+      .trip-type input {
+        margin: 0; /* Removes default margin for better alignment */
+      }
+
+      form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+      .form-group {
+        flex: 0 0 48%;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #estimateResult {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+    <style>
+      .pac-container {
+        background-color: #fff;
+        position: absolute !important;
+        z-index: 1000;
+        border-radius: 2px;
+        border-top: 1px solid #d9d9d9;
+        font-family: Arial, sans-serif;
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .pac-logo:after {
+        content: "";
+        padding: 1px 1px 1px 0;
+        height: 18px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: right;
+        display: block;
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);
+        background-position: right;
+        background-repeat: no-repeat;
+        -webkit-background-size: 120px 14px;
+        background-size: 120px 14px;
+      }
+      .hdpi.pac-logo:after {
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png);
+      }
+      .pac-item {
+        cursor: default;
+        padding: 0 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 30px;
+        text-align: left;
+        border-top: 1px solid #e6e6e6;
+        font-size: 11px;
+        color: #515151;
+      }
+      .pac-item:hover {
+        background-color: #fafafa;
+      }
+      .pac-item-selected,
+      .pac-item-selected:hover {
+        background-color: #ebf2fe;
+      }
+      .pac-matched {
+        font-weight: 700;
+      }
+      .pac-item-query {
+        font-size: 13px;
+        padding-right: 3px;
+        color: #000;
+      }
+      .pac-icon {
+        width: 15px;
+        height: 20px;
+        margin-right: 7px;
+        margin-top: 6px;
+        display: inline-block;
+        vertical-align: top;
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+        -webkit-background-size: 34px 34px;
+        background-size: 34px;
+      }
+      .hdpi .pac-icon {
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
+      }
+      .pac-icon-search {
+        background-position: -1px -1px;
+      }
+      .pac-item-selected .pac-icon-search {
+        background-position: -18px -1px;
+      }
+      .pac-icon-marker {
+        background-position: -1px -161px;
+      }
+      .pac-item-selected .pac-icon-marker {
+        background-position: -18px -161px;
+      }
+      .pac-placeholder {
+        color: gray;
+      }
+      sentinel {
+      }
+    </style>
+    <style>
+      .pac-container {
+        background-color: #fff;
+        position: absolute !important;
+        z-index: 1000;
+        border-radius: 2px;
+        border-top: 1px solid #d9d9d9;
+        font-family: Arial, sans-serif;
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .pac-logo:after {
+        content: "";
+        padding: 1px 1px 1px 0;
+        height: 18px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: right;
+        display: block;
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);
+        background-position: right;
+        background-repeat: no-repeat;
+        -webkit-background-size: 120px 14px;
+        background-size: 120px 14px;
+      }
+      .hdpi.pac-logo:after {
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png);
+      }
+      .pac-item {
+        cursor: default;
+        padding: 0 4px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 30px;
+        text-align: left;
+        border-top: 1px solid #e6e6e6;
+        font-size: 11px;
+        color: #515151;
+      }
+      .pac-item:hover {
+        background-color: #fafafa;
+      }
+      .pac-item-selected,
+      .pac-item-selected:hover {
+        background-color: #ebf2fe;
+      }
+      .pac-matched {
+        font-weight: 700;
+      }
+      .pac-item-query {
+        font-size: 13px;
+        padding-right: 3px;
+        color: #000;
+      }
+      .pac-icon {
+        width: 15px;
+        height: 20px;
+        margin-right: 7px;
+        margin-top: 6px;
+        display: inline-block;
+        vertical-align: top;
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+        -webkit-background-size: 34px 34px;
+        background-size: 34px;
+      }
+      .hdpi .pac-icon {
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
+      }
+      .pac-icon-search {
+        background-position: -1px -1px;
+      }
+      .pac-item-selected .pac-icon-search {
+        background-position: -18px -1px;
+      }
+      .pac-icon-marker {
+        background-position: -1px -161px;
+      }
+      .pac-item-selected .pac-icon-marker {
+        background-position: -18px -161px;
+      }
+      .pac-placeholder {
+        color: gray;
+      }
+      sentinel {
+      }
+    </style>
     <!-- <meta charset="utf-8" /> -->
-    <title>
-      Contact Us - Spark Safari
-    </title>
+    <title>Contact Us - Spark Safari</title>
     <meta
       name="description"
-      content="Contact Spark safari for your travel experience. we provide one-way drop taxi services and round trip services"
+      content="Book affordable one-way drop taxi and round trip services with us. Enjoy safe, reliable, and convenient travel options for all your journeys across South India. 24/7 availability!"
     />
     <meta
       name="keywords"
-      content="Droptaxi, One-Way Taxi, Vellore, Chennai, Coimbatore, Madurai, Bangalore"
+      content="Droptaxi, One-Way Taxi, Tamilnadu, Vellore, Chennai, Coimbatore, Madurai, Trichy, Bangalore"
     />
 
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
     <!-- <meta charset="utf-8" /> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="assets/icon.jpeg" />
 
     <style>
-      @charset "UTF-8";
+      /* @charset "UTF-8"; */
       :root {
         --bs-blue: #0d6efd;
         --bs-indigo: #6610f2;
@@ -409,13 +653,11 @@
     </style>
     <link
       rel="stylesheet"
-      href="styles.0ed8b4f580c7da7d.css"
+      href="styles.css"
       media="all"
       onload="this.media='all'"
     />
-    <noscript
-      ><link rel="stylesheet" href="styles.0ed8b4f580c7da7d.css"
-    /></noscript>
+    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
     <style type="text/css"></style>
     <style>
       @font-face {
@@ -831,193 +1073,1204 @@
         }
       }
     </style>
+    <style>
+      .about[_ngcontent-serverApp-c28] p[_ngcontent-serverApp-c28] {
+        margin-bottom: 16px;
+      }
+      span[_ngcontent-serverApp-c28] img[_ngcontent-serverApp-c28] {
+        max-width: 25px;
+        height: 25px;
+        object-fit: cover;
+      }
+      span.price[_ngcontent-serverApp-c28] {
+        font-size: 24px;
+        font-weight: 700;
+        color: red;
+      }
+      .sub-title[_ngcontent-serverApp-c28] {
+        display: inline-block;
+        line-height: 1;
+        background: var(--tg-common-color-gray);
+        border-radius: 4px;
+        padding: 7px 15px;
+        font-weight: var(--tg-fw-medium);
+        color: var(--tg-theme-primary);
+        margin: 0 0 13px;
+      }
+      .post-thumb[_ngcontent-serverApp-c28] img[_ngcontent-serverApp-c28] {
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+    <style>
+      mat-datepicker-toggle.mat-datepicker-toggle {
+        position: absolute;
+        top: 25px;
+        right: 10px;
+      }
+      .mat-mdc-select-placeholder,
+      .mat-mdc-select-value-text {
+        position: relative;
+      }
+      .group-img[_ngcontent-serverApp-c26] i[_ngcontent-serverApp-c26] {
+        position: relative;
+        top: -30px;
+      }
+    </style>
+    <style>
+      .mat-stepper-vertical,
+      .mat-stepper-horizontal {
+        display: block;
+      }
+      .mat-horizontal-stepper-header-container {
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header-container {
+        align-items: flex-start;
+      }
+      .mat-stepper-header-position-bottom
+        .mat-horizontal-stepper-header-container {
+        order: 1;
+      }
+      .mat-stepper-horizontal-line {
+        border-top-width: 1px;
+        border-top-style: solid;
+        flex: auto;
+        height: 0;
+        margin: 0 -16px;
+        min-width: 32px;
+      }
+      .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+        margin: 0;
+        min-width: 0;
+        position: relative;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:first-child)::before,
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:last-child)::before,
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:last-child)::after,
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:first-child)::after {
+        border-top-width: 1px;
+        border-top-style: solid;
+        content: "";
+        display: inline-block;
+        height: 0;
+        position: absolute;
+        width: calc(50% - 20px);
+      }
+      .mat-horizontal-stepper-header {
+        display: flex;
+        height: 72px;
+        overflow: hidden;
+        align-items: center;
+        padding: 0 24px;
+      }
+      .mat-horizontal-stepper-header .mat-step-icon {
+        margin-right: 8px;
+        flex: none;
+      }
+      [dir="rtl"] .mat-horizontal-stepper-header .mat-step-icon {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+      .mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
+        box-sizing: border-box;
+        flex-direction: column;
+        height: auto;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:last-child)::after,
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:first-child)::after {
+        right: 0;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:first-child)::before,
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:not(:last-child)::before {
+        left: 0;
+      }
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:last-child::before,
+      [dir="rtl"]
+        .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header:first-child::after {
+        display: none;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header
+        .mat-step-icon {
+        margin-right: 0;
+        margin-left: 0;
+      }
+      .mat-stepper-label-position-bottom
+        .mat-horizontal-stepper-header
+        .mat-step-label {
+        padding: 16px 0 0 0;
+        text-align: center;
+        width: 100%;
+      }
+      .mat-vertical-stepper-header {
+        display: flex;
+        align-items: center;
+        height: 24px;
+      }
+      .mat-vertical-stepper-header .mat-step-icon {
+        margin-right: 12px;
+      }
+      [dir="rtl"] .mat-vertical-stepper-header .mat-step-icon {
+        margin-right: 0;
+        margin-left: 12px;
+      }
+      .mat-horizontal-stepper-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .mat-horizontal-stepper-content {
+        outline: 0;
+      }
+      .mat-horizontal-stepper-content.mat-horizontal-stepper-content-inactive {
+        height: 0;
+        overflow: hidden;
+      }
+      .mat-horizontal-stepper-content:not(
+          .mat-horizontal-stepper-content-inactive
+        ) {
+        visibility: inherit !important;
+      }
+      .mat-horizontal-content-container {
+        overflow: hidden;
+        padding: 0 24px 24px 24px;
+      }
+      .cdk-high-contrast-active .mat-horizontal-content-container {
+        outline: solid 1px;
+      }
+      .mat-stepper-header-position-bottom .mat-horizontal-content-container {
+        padding: 24px 24px 0 24px;
+      }
+      .mat-vertical-content-container {
+        margin-left: 36px;
+        border: 0;
+        position: relative;
+      }
+      .cdk-high-contrast-active .mat-vertical-content-container {
+        outline: solid 1px;
+      }
+      [dir="rtl"] .mat-vertical-content-container {
+        margin-left: 0;
+        margin-right: 36px;
+      }
+      .mat-stepper-vertical-line::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        border-left-width: 1px;
+        border-left-style: solid;
+      }
+      [dir="rtl"] .mat-stepper-vertical-line::before {
+        left: auto;
+        right: 0;
+      }
+      .mat-vertical-stepper-content {
+        overflow: hidden;
+        outline: 0;
+      }
+      .mat-vertical-stepper-content:not(
+          .mat-vertical-stepper-content-inactive
+        ) {
+        visibility: inherit !important;
+      }
+      .mat-vertical-content {
+        padding: 0 24px 24px 24px;
+      }
+      .mat-step:last-child .mat-vertical-content-container {
+        border: none;
+      }
+    </style>
+    <style>
+      .mdc-radio {
+        display: inline-block;
+        position: relative;
+        flex: 0 0 auto;
+        box-sizing: content-box;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        will-change: opacity, transform, border-color, color;
+      }
+      .mdc-radio[hidden] {
+        display: none;
+      }
+      .mdc-radio__background {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        width: 20px;
+        height: 20px;
+      }
+      .mdc-radio__background::before {
+        position: absolute;
+        transform: scale(0, 0);
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        content: "";
+        transition: opacity 120ms 0ms cubic-bezier(0.4, 0, 0.6, 1),
+          transform 120ms 0ms cubic-bezier(0.4, 0, 0.6, 1);
+      }
+      .mdc-radio__outer-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 50%;
+        transition: border-color 120ms 0ms cubic-bezier(0.4, 0, 0.6, 1);
+      }
+      .mdc-radio__inner-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        transform: scale(0, 0);
+        border-width: 10px;
+        border-style: solid;
+        border-radius: 50%;
+        transition: transform 120ms 0ms cubic-bezier(0.4, 0, 0.6, 1),
+          border-color 120ms 0ms cubic-bezier(0.4, 0, 0.6, 1);
+      }
+      .mdc-radio__native-control {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        cursor: inherit;
+        z-index: 1;
+      }
+      .mdc-radio--touch {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 4px;
+        margin-left: 4px;
+      }
+      .mdc-radio--touch .mdc-radio__native-control {
+        top: calc((40px - 48px) / 2);
+        right: calc((40px - 48px) / 2);
+        left: calc((40px - 48px) / 2);
+        width: 48px;
+        height: 48px;
+      }
+      .mdc-radio.mdc-ripple-upgraded--background-focused .mdc-radio__focus-ring,
+      .mdc-radio:not(.mdc-ripple-upgraded):focus .mdc-radio__focus-ring {
+        pointer-events: none;
+        border: 2px solid rgba(0, 0, 0, 0);
+        border-radius: 6px;
+        box-sizing: content-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: 100%;
+      }
+      @media screen and (forced-colors: active) {
+        .mdc-radio.mdc-ripple-upgraded--background-focused
+          .mdc-radio__focus-ring,
+        .mdc-radio:not(.mdc-ripple-upgraded):focus .mdc-radio__focus-ring {
+          border-color: CanvasText;
+        }
+      }
+      .mdc-radio.mdc-ripple-upgraded--background-focused
+        .mdc-radio__focus-ring::after,
+      .mdc-radio:not(.mdc-ripple-upgraded):focus .mdc-radio__focus-ring::after {
+        content: "";
+        border: 2px solid rgba(0, 0, 0, 0);
+        border-radius: 8px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: calc(100% + 4px);
+        width: calc(100% + 4px);
+      }
+      @media screen and (forced-colors: active) {
+        .mdc-radio.mdc-ripple-upgraded--background-focused
+          .mdc-radio__focus-ring::after,
+        .mdc-radio:not(.mdc-ripple-upgraded):focus
+          .mdc-radio__focus-ring::after {
+          border-color: CanvasText;
+        }
+      }
+      .mdc-radio__native-control:checked + .mdc-radio__background,
+      .mdc-radio__native-control:disabled + .mdc-radio__background {
+        transition: opacity 120ms 0ms cubic-bezier(0, 0, 0.2, 1),
+          transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+      }
+      .mdc-radio__native-control:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mdc-radio__native-control:disabled
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        transition: border-color 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+      }
+      .mdc-radio__native-control:checked
+        + .mdc-radio__background
+        .mdc-radio__inner-circle,
+      .mdc-radio__native-control:disabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        transition: transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1),
+          border-color 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+      }
+      .mdc-radio--disabled {
+        cursor: default;
+        pointer-events: none;
+      }
+      .mdc-radio__native-control:checked
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        transform: scale(0.5);
+        transition: transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1),
+          border-color 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+      }
+      .mdc-radio__native-control:disabled + .mdc-radio__background,
+      [aria-disabled="true"]
+        .mdc-radio__native-control
+        + .mdc-radio__background {
+        cursor: default;
+      }
+      .mdc-radio__native-control:focus + .mdc-radio__background::before {
+        transform: scale(1);
+        opacity: 0.12;
+        transition: opacity 120ms 0ms cubic-bezier(0, 0, 0.2, 1),
+          transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+      }
+      .mdc-form-field {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+      }
+      .mdc-form-field[hidden] {
+        display: none;
+      }
+      .mdc-form-field > label {
+        margin-left: 0;
+        margin-right: auto;
+        padding-left: 4px;
+        padding-right: 0;
+        order: 0;
+      }
+      [dir="rtl"] .mdc-form-field > label,
+      .mdc-form-field > label[dir="rtl"] {
+        margin-left: auto;
+        margin-right: 0;
+      }
+      [dir="rtl"] .mdc-form-field > label,
+      .mdc-form-field > label[dir="rtl"] {
+        padding-left: 0;
+        padding-right: 4px;
+      }
+      .mdc-form-field--nowrap > label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .mdc-form-field--align-end > label {
+        margin-left: auto;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 4px;
+        order: -1;
+      }
+      [dir="rtl"] .mdc-form-field--align-end > label,
+      .mdc-form-field--align-end > label[dir="rtl"] {
+        margin-left: 0;
+        margin-right: auto;
+      }
+      [dir="rtl"] .mdc-form-field--align-end > label,
+      .mdc-form-field--align-end > label[dir="rtl"] {
+        padding-left: 4px;
+        padding-right: 0;
+      }
+      .mdc-form-field--space-between {
+        justify-content: space-between;
+      }
+      .mdc-form-field--space-between > label {
+        margin: 0;
+      }
+      [dir="rtl"] .mdc-form-field--space-between > label,
+      .mdc-form-field--space-between > label[dir="rtl"] {
+        margin: 0;
+      }
+      .mat-mdc-radio-button {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      .mat-mdc-radio-button .mdc-radio {
+        padding: calc((var(--mdc-radio-state-layer-size, 40px) - 20px) / 2);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-disabled-selected-icon-color, #000);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control
+        + .mdc-radio__background
+        .mdc-radio__inner-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        border-color: var(--mdc-radio-disabled-selected-icon-color, #000);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        opacity: var(--mdc-radio-disabled-selected-icon-opacity, 0.38);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control
+        + .mdc-radio__background
+        .mdc-radio__inner-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        opacity: var(--mdc-radio-disabled-selected-icon-opacity, 0.38);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-disabled-unselected-icon-color, #000);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        [aria-disabled="true"]
+        .mdc-radio__native-control:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:disabled:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        opacity: var(--mdc-radio-disabled-unselected-icon-opacity, 0.38);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio.mdc-ripple-upgraded--background-focused
+        .mdc-radio__native-control:enabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle,
+      .mat-mdc-radio-button
+        .mdc-radio:not(.mdc-ripple-upgraded):focus
+        .mdc-radio__native-control:enabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-selected-focus-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio.mdc-ripple-upgraded--background-focused
+        .mdc-radio__native-control:enabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle,
+      .mat-mdc-radio-button
+        .mdc-radio:not(.mdc-ripple-upgraded):focus
+        .mdc-radio__native-control:enabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        border-color: var(--mdc-radio-selected-focus-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:hover
+        .mdc-radio__native-control:enabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-selected-hover-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:hover
+        .mdc-radio__native-control:enabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        border-color: var(--mdc-radio-selected-hover-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:enabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-selected-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:enabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        border-color: var(--mdc-radio-selected-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:not(:disabled):active
+        .mdc-radio__native-control:enabled:checked
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-selected-pressed-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:not(:disabled):active
+        .mdc-radio__native-control:enabled
+        + .mdc-radio__background
+        .mdc-radio__inner-circle {
+        border-color: var(--mdc-radio-selected-pressed-icon-color, #6200ee);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:hover
+        .mdc-radio__native-control:enabled:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-unselected-hover-icon-color, #000);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:enabled:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-unselected-icon-color, #000);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:not(:disabled):active
+        .mdc-radio__native-control:enabled:not(:checked)
+        + .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-unselected-pressed-icon-color, #000);
+      }
+      .mat-mdc-radio-button .mdc-radio .mdc-radio__background::before {
+        top: calc(-1 * (var(--mdc-radio-state-layer-size, 40px) - 20px) / 2);
+        left: calc(-1 * (var(--mdc-radio-state-layer-size, 40px) - 20px) / 2);
+        width: var(--mdc-radio-state-layer-size, 40px);
+        height: var(--mdc-radio-state-layer-size, 40px);
+      }
+      .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control {
+        top: calc(
+          (
+              var(--mdc-radio-state-layer-size, 40px) -
+                var(--mdc-radio-state-layer-size, 40px)
+            ) / 2
+        );
+        right: calc(
+          (
+              var(--mdc-radio-state-layer-size, 40px) -
+                var(--mdc-radio-state-layer-size, 40px)
+            ) / 2
+        );
+        left: calc(
+          (
+              var(--mdc-radio-state-layer-size, 40px) -
+                var(--mdc-radio-state-layer-size, 40px)
+            ) / 2
+        );
+        width: var(--mdc-radio-state-layer-size, 40px);
+        height: var(--mdc-radio-state-layer-size, 40px);
+      }
+      .mat-mdc-radio-button .mdc-radio .mdc-radio__background::before {
+        background-color: var(--mat-mdc-radio-ripple-color, transparent);
+      }
+      .mat-mdc-radio-button
+        .mdc-radio:hover
+        .mdc-radio__native-control:not([disabled]):not(:focus)
+        ~ .mdc-radio__background::before {
+        opacity: 0.04;
+        transform: scale(1);
+      }
+      .mat-mdc-radio-button.mat-mdc-radio-checked
+        .mdc-radio__background::before {
+        background-color: var(
+          --mat-mdc-radio-checked-ripple-color,
+          transparent
+        );
+      }
+      .mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+        background-color: var(
+          --mat-mdc-radio-checked-ripple-color,
+          transparent
+        );
+      }
+      .mat-mdc-radio-button .mat-radio-ripple {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        pointer-events: none;
+        border-radius: 50%;
+      }
+      .mat-mdc-radio-button .mat-radio-ripple .mat-ripple-element {
+        opacity: 0.14;
+      }
+      .mat-mdc-radio-button .mat-radio-ripple::before {
+        border-radius: 50%;
+      }
+      .mat-mdc-radio-button._mat-animation-noopable
+        .mdc-radio__background::before,
+      .mat-mdc-radio-button._mat-animation-noopable .mdc-radio__outer-circle,
+      .mat-mdc-radio-button._mat-animation-noopable .mdc-radio__inner-circle {
+        transition: none !important;
+      }
+      .mat-mdc-radio-button
+        .mdc-radio
+        .mdc-radio__native-control:focus:enabled:not(:checked)
+        ~ .mdc-radio__background
+        .mdc-radio__outer-circle {
+        border-color: var(--mdc-radio-unselected-focus-icon-color, black);
+      }
+      .mat-mdc-radio-button.cdk-focused .mat-mdc-focus-indicator::before {
+        content: "";
+      }
+      .mat-mdc-radio-touch-target {
+        position: absolute;
+        top: 50%;
+        height: 48px;
+        left: 50%;
+        width: 48px;
+        transform: translate(-50%, -50%);
+      }
+      [dir="rtl"] .mat-mdc-radio-touch-target {
+        left: 0;
+        right: 50%;
+        transform: translate(50%, -50%);
+      }
+    </style>
+    <style>
+      .agm-map-container-inner[_ngcontent-serverApp-c2] {
+        width: inherit;
+        height: inherit;
+      }
+      .agm-map-content[_ngcontent-serverApp-c2] {
+        display: none;
+      }
+    </style>
+    <style>
+      .mdc-menu-surface {
+        display: none;
+        position: absolute;
+        box-sizing: border-box;
+        max-width: calc(100vw - 32px);
+        max-width: var(--mdc-menu-max-width, calc(100vw - 32px));
+        max-height: calc(100vh - 32px);
+        max-height: var(--mdc-menu-max-height, calc(100vh - 32px));
+        margin: 0;
+        padding: 0;
+        transform: scale(1);
+        transform-origin: top left;
+        opacity: 0;
+        overflow: auto;
+        will-change: transform, opacity;
+        z-index: 8;
+        border-radius: 4px;
+        border-radius: var(--mdc-shape-medium, 4px);
+        transform-origin-left: top left;
+        transform-origin-right: top right;
+      }
+      .mdc-menu-surface:focus {
+        outline: none;
+      }
+      .mdc-menu-surface--animating-open {
+        display: inline-block;
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      .mdc-menu-surface--open {
+        display: inline-block;
+        transform: scale(1);
+        opacity: 1;
+      }
+      .mdc-menu-surface--animating-closed {
+        display: inline-block;
+        opacity: 0;
+      }
+      [dir="rtl"] .mdc-menu-surface,
+      .mdc-menu-surface[dir="rtl"] {
+        transform-origin-left: top right;
+        transform-origin-right: top left;
+      }
+      .mdc-menu-surface--anchor {
+        position: relative;
+        overflow: visible;
+      }
+      .mdc-menu-surface--fixed {
+        position: fixed;
+      }
+      .mdc-menu-surface--fullwidth {
+        width: 100%;
+      }
+      .mat-mdc-select {
+        display: inline-block;
+        width: 100%;
+        outline: none;
+      }
+      .mat-mdc-select-trigger {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+      }
+      .mat-mdc-select-disabled .mat-mdc-select-trigger {
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+      }
+      .mat-mdc-select-value {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .mat-mdc-select-value-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mat-mdc-select-arrow-wrapper {
+        height: 24px;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+      }
+      .mat-form-field-appearance-fill .mat-mdc-select-arrow-wrapper {
+        transform: translateY(-8px);
+      }
+      .mat-form-field-appearance-fill
+        .mdc-text-field--no-label
+        .mat-mdc-select-arrow-wrapper {
+        transform: none;
+      }
+      .mat-mdc-select-arrow {
+        width: 10px;
+        height: 5px;
+        position: relative;
+      }
+      .mat-mdc-select-arrow svg {
+        fill: currentColor;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .cdk-high-contrast-active .mat-mdc-select-arrow svg {
+        fill: CanvasText;
+      }
+      .mat-mdc-select-disabled
+        .cdk-high-contrast-active
+        .mat-mdc-select-arrow
+        svg {
+        fill: GrayText;
+      }
+      .mdc-menu-surface.mat-mdc-select-panel {
+        width: 100%;
+        max-height: 275px;
+        position: static;
+        outline: 0;
+        margin: 0;
+        padding: 8px 0;
+        list-style-type: none;
+      }
+      .mdc-menu-surface.mat-mdc-select-panel:focus {
+        outline: none;
+      }
+      .cdk-high-contrast-active .mdc-menu-surface.mat-mdc-select-panel {
+        outline: solid 1px;
+      }
+      .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
+        .mdc-menu-surface.mat-mdc-select-panel {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        transform-origin: top center;
+      }
+      .mat-mdc-select-panel-above .mdc-menu-surface.mat-mdc-select-panel {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        transform-origin: bottom center;
+      }
+      .mat-mdc-select-placeholder {
+        transition: color 400ms 133.3333333333ms
+          cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      ._mat-animation-noopable .mat-mdc-select-placeholder {
+        transition: none;
+      }
+      .mat-form-field-hide-placeholder .mat-mdc-select-placeholder {
+        color: rgba(0, 0, 0, 0);
+        -webkit-text-fill-color: rgba(0, 0, 0, 0);
+        transition: none;
+        display: block;
+      }
+      .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill
+        .mat-mdc-floating-label {
+        max-width: calc(100% - 18px);
+      }
+      .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill
+        .mdc-floating-label--float-above {
+        max-width: calc(100% / 0.75 - 24px);
+      }
+      .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline
+        .mdc-notched-outline__notch {
+        max-width: calc(100% - 60px);
+      }
+      .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline
+        .mdc-text-field--label-floating
+        .mdc-notched-outline__notch {
+        max-width: calc(100% - 24px);
+      }
+      .mat-mdc-select-min-line:empty::before {
+        content: " ";
+        white-space: pre;
+        width: 1px;
+        display: inline-block;
+        visibility: hidden;
+      }
+    </style>
+    <style>
+      .mat-mdc-option {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        min-height: 48px;
+      }
+      .mat-mdc-option:focus {
+        outline: none;
+      }
+      [dir="rtl"] .mat-mdc-option,
+      .mat-mdc-option[dir="rtl"] {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .mat-mdc-option.mdc-list-item {
+        align-items: center;
+      }
+      .mat-mdc-option.mdc-list-item--disabled {
+        opacity: 0.38;
+        cursor: default;
+      }
+      .mat-mdc-optgroup .mat-mdc-option:not(.mat-mdc-option-multiple) {
+        padding-left: 32px;
+      }
+      [dir="rtl"]
+        .mat-mdc-optgroup
+        .mat-mdc-option:not(.mat-mdc-option-multiple) {
+        padding-left: 16px;
+        padding-right: 32px;
+      }
+      .mat-mdc-option .mat-icon,
+      .mat-mdc-option .mat-pseudo-checkbox-full {
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+      [dir="rtl"] .mat-mdc-option .mat-icon,
+      [dir="rtl"] .mat-mdc-option .mat-pseudo-checkbox-full {
+        margin-right: 0;
+        margin-left: 16px;
+      }
+      .mat-mdc-option .mat-pseudo-checkbox-minimal {
+        margin-left: 16px;
+        flex-shrink: 0;
+      }
+      [dir="rtl"] .mat-mdc-option .mat-pseudo-checkbox-minimal {
+        margin-right: 16px;
+        margin-left: 0;
+      }
+      .mat-mdc-option .mat-mdc-option-ripple {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .mat-mdc-option .mdc-list-item__primary-text {
+        white-space: normal;
+        font-size: inherit;
+        font-weight: inherit;
+        letter-spacing: inherit;
+        line-height: inherit;
+        font-family: inherit;
+        text-decoration: inherit;
+        text-transform: inherit;
+        margin-right: auto;
+      }
+      [dir="rtl"] .mat-mdc-option .mdc-list-item__primary-text {
+        margin-right: 0;
+        margin-left: auto;
+      }
+      .cdk-high-contrast-active
+        .mat-mdc-option.mdc-list-item--selected:not(
+          .mat-mdc-option-multiple
+        )::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 0;
+        border-bottom: solid 10px;
+        border-radius: 10px;
+      }
+      [dir="rtl"]
+        .cdk-high-contrast-active
+        .mat-mdc-option.mdc-list-item--selected:not(
+          .mat-mdc-option-multiple
+        )::after {
+        right: auto;
+        left: 16px;
+      }
+      .mat-mdc-option-active::before {
+        content: "";
+      }
+    </style>
+    <style>
+      .mat-step-header {
+        overflow: hidden;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        box-sizing: content-box;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+      .mat-step-header:focus .mat-focus-indicator::before {
+        content: "";
+      }
+      .cdk-high-contrast-active .mat-step-header {
+        outline: solid 1px;
+      }
+      .cdk-high-contrast-active
+        .mat-step-header[aria-selected="true"]
+        .mat-step-label {
+        text-decoration: underline;
+      }
+      .cdk-high-contrast-active .mat-step-header[aria-disabled="true"] {
+        outline-color: GrayText;
+      }
+      .cdk-high-contrast-active
+        .mat-step-header[aria-disabled="true"]
+        .mat-step-label,
+      .cdk-high-contrast-active
+        .mat-step-header[aria-disabled="true"]
+        .mat-step-icon,
+      .cdk-high-contrast-active
+        .mat-step-header[aria-disabled="true"]
+        .mat-step-optional {
+        color: GrayText;
+      }
+      .mat-step-optional,
+      .mat-step-sub-label-error {
+        font-size: 12px;
+      }
+      .mat-step-icon {
+        border-radius: 50%;
+        height: 24px;
+        width: 24px;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .mat-step-icon-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+      }
+      .mat-step-icon .mat-icon {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+      }
+      .mat-step-icon-state-error .mat-icon {
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
+      }
+      .mat-step-label {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 50px;
+        vertical-align: middle;
+      }
+      .mat-step-text-label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .mat-step-header .mat-step-header-ripple {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/57/13/intl/en_gb/common.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/57/13/intl/en_gb/util.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/57/13/intl/en_gb/controls.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/57/13/intl/en_gb/places_impl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      charset="UTF-8"
+      src="https://maps.googleapis.com/maps-api-v3/api/js/57/13/intl/en_gb/map.js"
+    ></script>
   </head>
 
   <body>
     <div class="main-wrapper">
       <app-root _nghost-serverapp-c34="" ng-version="15.2.3"
-        ><app-header _ngcontent-serverapp-c34="" _nghost-serverapp-c33=""
-          ><header _ngcontent-serverapp-c33="" class="theme-1">
+        ><app-header _ngcontent-serverapp-c34="" _nghost-serverapp-c33="">
+          <header _ngcontent-serverapp-c33="" class="theme-1">
             <div _ngcontent-serverapp-c33="" class="header__upper">
               <div _ngcontent-serverapp-c33="" class="container">
-                <div _ngcontent-serverapp-c33="" class="row">
-                  <div _ngcontent-serverapp-c33="" class="col-12 col-lg-6">
-                    <div
-                      _ngcontent-serverapp-c33=""
-                      class="header__upper--left"
-                    >
-                      <div
-                        _ngcontent-serverapp-c33=""
-                        class="d-none d-lg-block logo"
-                      >
-                        <a _ngcontent-serverapp-c33="" href="index.html"
-                          ><img
-                            _ngcontent-serverapp-c33=""
+                <div _ngcontent-serverapp-c33="" class="row align-items-start">
+                  <!-- Logo Section -->
+                  <div _ngcontent-serverapp-c33="" class="col-6 col-lg-6">
+                    <div class="d-flex align-items-center">
+                      <div class="logo">
+                        <a href="index.html">
+                          <img
                             src="assets/logo.webp"
                             alt="Site Logo"
-                            style="width: 40%"
-                        /></a>
+                            style="width: 60%; max-width: 150px"
+                          />
+                        </a>
                       </div>
-                      <div
-                        _ngcontent-serverapp-c33=""
-                        class="d-block d-lg-none logo w-49px"
-                      >
-                        <a _ngcontent-serverapp-c33="" href="index.html"
-                          ><img
-                            _ngcontent-serverapp-c33=""
-                            src="assets/logo.webp"
-                            alt="Site Logo"
-                        /></a>
-                      </div>
-                      <button
-                        _ngcontent-serverapp-c33=""
-                        type="button"
-                        class="nav-toggle-btn a-nav-toggle ms-auto d-block d-lg-none"
-                      >
-                        <span
-                          _ngcontent-serverapp-c33=""
-                          class="nav-toggle nav-toggle-sm"
-                          ><span
-                            _ngcontent-serverapp-c33=""
-                            class="stick stick-1"
-                          ></span
-                          ><span
-                            _ngcontent-serverapp-c33=""
-                            class="stick stick-2"
-                          ></span
-                          ><span
-                            _ngcontent-serverapp-c33=""
-                            class="stick stick-3"
-                          ></span
-                        ></span>
-                      </button>
                     </div>
                   </div>
+
+                  <!-- Navbar Section -->
                   <div
                     _ngcontent-serverapp-c33=""
-                    class="d-none d-lg-block col-lg-6"
-                  >
-                    <div
-                      _ngcontent-serverapp-c33=""
-                      class="header__upper--right"
-                    >
-                      <a
-                        _ngcontent-serverapp-c33=""
-                        class="button p-0"
-                        href="tel:9344105565"
-                        ><i _ngcontent-serverapp-c33="" class="far fa-taxi"></i>
-                        Book a Ride</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div _ngcontent-serverapp-c33="" class="header__lower">
-              <div _ngcontent-serverapp-c33="" class="container">
-                <div _ngcontent-serverapp-c33="" class="row">
-                  <div
-                    _ngcontent-serverapp-c33=""
-                    class="d-none d-lg-block col-lg-12"
+                    class="col-6 col-lg-6 text-right w-15"
                   >
                     <nav
-                      _ngcontent-serverapp-c33=""
-                      class="navbar navbar-expand-lg navbar-dark"
+                      class="navbar navbar-expand-lg navbar-light custom-navbar"
                     >
                       <button
-                        _ngcontent-serverapp-c33=""
+                        class="navbar-toggler"
                         type="button"
                         data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
+                        data-target="#navbarNav"
+                        aria-controls="navbarNav"
                         aria-expanded="false"
                         aria-label="Toggle navigation"
-                        class="navbar-toggler"
                       >
-                        <span
-                          _ngcontent-serverapp-c33=""
-                          class="navbar-toggler-icon"
-                        ></span>
+                        <span class="navbar-toggler-icon"></span>
                       </button>
                       <div
-                        _ngcontent-serverapp-c33=""
-                        id="navbarSupportedContent"
-                        class="collapse navbar-collapse"
+                        class="collapse navbar-collapse justify-content-end"
+                        id="navbarNav"
                       >
-                        <ul
-                          _ngcontent-serverapp-c33=""
-                          class="navbar-nav me-auto"
-                        >
-                          <li
-                            _ngcontent-serverapp-c33=""
-                            class="nav-item dropdown active"
-                          >
+                        <ul class="navbar-nav">
+                          <li class="nav-item active">
                             <a
-                              _ngcontent-serverapp-c33=""
-                              data-bs-toggle="dropdown"
-                              role="button"
-                              aria-expanded="false"
+                              class="nav-link custom-nav-link"
                               href="index.html"
-                              class="nav-link dropdown-toggle"
-                              ><i
-                                _ngcontent-serverapp-c33=""
-                                class="fas fa-home"
-                              ></i
-                              >Home<span
-                                _ngcontent-serverapp-c33=""
-                                class="sr-only"
-                                >(current)</span
-                              ></a
+                              >Home</a
                             >
                           </li>
-                          <li _ngcontent-serverapp-c33="" class="nav-item">
+                          <li class="nav-item">
                             <a
-                              _ngcontent-serverapp-c33=""
-                              href="/about.html"
-                              class="nav-link"
-                              ><i
-                                _ngcontent-serverapp-c33=""
-                                class="fas fa-exclamation-circle"
-                              ></i
+                              class="nav-link custom-nav-link"
+                              href="about.html"
                               >About</a
                             >
                           </li>
-                          <li _ngcontent-serverapp-c33="" class="nav-item">
+                          <li class="nav-item">
                             <a
-                              _ngcontent-serverapp-c33=""
-                              href="/tariff.html"
-                              class="nav-link"
-                              ><i
-                                _ngcontent-serverapp-c33=""
-                                class="fas fa-taxi"
-                              ></i
-                              >Our Tariff</a
-                            >
-                          </li>
-                          <li _ngcontent-serverapp-c33="" class="nav-item">
-                            <a
-                              _ngcontent-serverapp-c33=""
-                              href="/contact.html"
-                              class="nav-link"
-                              ><i
-                                _ngcontent-serverapp-c33=""
-                                class="fas fa-map-marker-alt"
-                              ></i
+                              class="nav-link custom-nav-link"
+                              href="contact.html"
                               >Contact</a
                             >
                           </li>
+                          <li class="nav-item">
+                            <a
+                              class="nav-link custom-nav-link"
+                              href="tariff.html"
+                              >Tariff</a
+                            >
+                          </li>
                         </ul>
-                        <div
-                          _ngcontent-serverapp-c33=""
-                          class="my-2 my-lg-0 d-inline-flex"
-                        >
-                          <a
-                            _ngcontent-serverapp-c33=""
-                            class="button button-light big"
-                            href="tel:9344105565"
-                            >Book Now</a
-                          >
-                        </div>
                       </div>
                     </nav>
                   </div>
@@ -1025,6 +2278,7 @@
               </div>
             </div>
           </header>
+
           <section _ngcontent-serverapp-c33="" class="responsive-menu">
             <div _ngcontent-serverapp-c33="" class="rep-header">
               <div _ngcontent-serverapp-c33="" class="logo">
@@ -1181,171 +2435,96 @@
               </div>
             </div>
           </div></app-contact
-        ><!----><app-footer _ngcontent-serverapp-c34="" _nghost-serverapp-c32=""
-          ><footer _ngcontent-serverapp-c32="" class="footer-div theme-1">
-            <div _ngcontent-serverapp-c32="" class="footer-shape">
-              <svg
-                _ngcontent-serverApp-c32=""
-                data-name="Layer 1"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1200 120"
-                preserveAspectRatio="none"
-              >
-                <path
-                  _ngcontent-serverApp-c32=""
-                  d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-                  class="shape-fill"
-                ></path>
-              </svg>
-            </div>
-            <div _ngcontent-serverapp-c32="" class="footer-shape">
-              <svg
-                _ngcontent-serverApp-c32=""
-                data-name="Layer 1"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1200 120"
-                preserveAspectRatio="none"
-              >
-                <path
-                  _ngcontent-serverApp-c32=""
-                  d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-                  class="shape-fill"
-                ></path>
-              </svg>
-            </div>
-            <div
-              _ngcontent-serverapp-c32=""
-              class="footer-nav-div div-padding theme-1"
-            >
-              <div _ngcontent-serverapp-c32="" class="container">
-                <div _ngcontent-serverapp-c32="" class="row">
-                  <div _ngcontent-serverapp-c32="" class="col-lg-3 col-sm-6">
-                    <div _ngcontent-serverapp-c32="" class="footer-brand">
-                      <a _ngcontent-serverapp-c32="" href="index.html"
-                        ><img
-                          _ngcontent-serverapp-c32=""
-                          src="assets/logo1.png"
-                          alt="Logo"
-                      /></a>
-                    </div>
-                    <div
-                      _ngcontent-serverapp-c32=""
-                      class="footer-text pe-lg-3"
-                    >
-                      <p _ngcontent-serverapp-c32="" class="mb-4">
-                        Experience the future of transportation with Spark Safari. Your journey matters, and we’re here to make it memorable, efficient, and enjoyable. Ride with Spark Safari and discover how every trip redefines travel excellence.
-                      </p>
-                    </div>
-                    <div _ngcontent-serverapp-c32="" class="helpline">
-                      <h4 _ngcontent-serverapp-c32="" class="mb-0">
-                        <span _ngcontent-serverapp-c32="">Helpline</span>
-                      </h4>
-                      <p _ngcontent-serverapp-c32="" class="mb-0">
-                        (+91) 9344105565
-                      </p>
-                    </div>
+        ><!----><app-footer
+          _ngcontent-serverapp-c34=""
+          _nghost-serverapp-c32=""
+        >
+          <footer class="footer-div theme-1">
+            <div class="container footer-content">
+              <div class="row">
+                <!-- Column 1: Logo -->
+                <div class="col-lg-3 col-sm-6">
+                  <div class="footer-brand">
+                    <a href="index.html"
+                      ><img
+                        src="assets/logo1.png"
+                        alt="Logo"
+                        style="width: 50%"
+                    /></a>
                   </div>
-                  <div _ngcontent-serverapp-c32="" class="col-lg-3 col-sm-6">
-                    <h4 _ngcontent-serverapp-c32="">Useful links</h4>
-                    <nav _ngcontent-serverapp-c32="" class="footer-navigation">
-                      <ul _ngcontent-serverapp-c32="">
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/about.html">About</a>
-                        </li>
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/tariff.html"
-                            >Our vehicles</a
-                          >
-                        </li>
-                        <!-- <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/about.html"
-                            >Services</a
-                          >
-                        </li> -->
-                      </ul>
-                      <ul _ngcontent-serverapp-c32="">
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="tel:9344105565"
-                            >Become a Driver</a
-                          >
-                        </li>
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/terms"
-                            >Terms &amp; Conditions</a
-                          >
-                        </li>
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/contact.html"
-                            >Help</a
-                          >
-                        </li>
-                        <li _ngcontent-serverapp-c32="">
-                          <a _ngcontent-serverapp-c32="" href="/privacy"
-                            >Privecy policy</a
-                          >
-                        </li>
-                      </ul>
-                    </nav>
+                </div>
+
+                <!-- Column 2: Experience Text and Helpline -->
+                <div class="col-lg-3 col-sm-6">
+                  <p class="footer-text text-white" style="font-size: 1rem">
+                    Experience the future of transportation with Spark Safari.
+                    Your journey matters, and we’re here to make it memorable,
+                    efficient, and enjoyable. Ride with Spark Safari and
+                    discover how every trip redefines travel excellence.
+                  </p>
+                  <div class="helpline">
+                    <h4 class="text-white">Helpline</h4>
+                    <p class="text-white mt-3">(+91) 9344105565</p>
                   </div>
-                  
+                </div>
+
+                <!-- Column 3: Useful Links -->
+                <div class="col-lg-3 col-sm-6">
+                  <h4 class="text-white">Useful Links</h4>
+                  <nav class="footer-navigation">
+                    <ul>
+                      <li><a href="/about">About</a></li>
+                      <li><a href="/tariff">Our Vehicles</a></li>
+                      <li><a href="tel:9344105565">Become a Driver</a></li>
+                      <li><a href="/terms">Terms &amp; Conditions</a></li>
+                      <li><a href="/privacy">Privacy Policy</a></li>
+                      <li><a href="/contact.html">Help</a></li>
+                    </ul>
+                  </nav>
+                </div>
+
+                <!-- Column 4: Social Icons -->
+                <div class="col-lg-3 col-sm-6">
+                  <h4 class="text-white">Follow Us</h4>
+                  <ul class="social-nav">
+                    <li>
+                      <a href="" class="facebook"
+                        ><i class="fab fa-facebook-f"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="" class="twitter"
+                        ><i class="fab fa-twitter"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="" class="instagram"
+                        ><i class="fab fa-instagram"></i
+                      ></a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <div _ngcontent-serverapp-c32="" class="copyright-div">
-              <div _ngcontent-serverapp-c32="" class="container">
-                <div _ngcontent-serverapp-c32="" class="row">
-                  <div _ngcontent-serverapp-c32="" class="col-lg-6">
-                    <p _ngcontent-serverapp-c32="">
+
+            <div class="copyright-div">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <p>
                       © Copyright 2024 by Spark Safari. All Right Reserved.
                       Developed By
                       <a
-                        _ngcontent-serverapp-c32=""
                         href="https://www.instagram.com/s2_digital_agency?igsh=MTh5NmQ1ZXZrODNyNA=="
                         >S2 Digital Agency</a
                       >
                     </p>
                   </div>
-                  <div _ngcontent-serverapp-c32="" class="col-lg-6">
-                    <ul _ngcontent-serverapp-c32="" class="social-nav">
-                      <li _ngcontent-serverapp-c32="">
-                        <a
-                          _ngcontent-serverapp-c32=""
-                          href=""
-                          class="facebook"
-                          ><i
-                            _ngcontent-serverapp-c32=""
-                            class="fab fa-facebook-f"
-                          ></i
-                        ></a>
-                      </li>
-                      <li _ngcontent-serverapp-c32="">
-                        <a
-                          _ngcontent-serverapp-c32=""
-                          href=""
-                          class="twitter"
-                          ><i
-                            _ngcontent-serverapp-c32=""
-                            class="fab fa-twitter"
-                          ></i
-                        ></a>
-                      </li>
-                      <li _ngcontent-serverapp-c32="">
-                        <a
-                          _ngcontent-serverapp-c32=""
-                          href=""
-                          class="instagram"
-                          ><i
-                            _ngcontent-serverapp-c32=""
-                            class="fab fa-instagram"
-                          ></i
-                        ></a>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </div>
-            </div></footer
-        ></app-footer>
+            </div>
+          </footer>
+        </app-footer>
         <div _ngcontent-serverapp-c34="" class="whatsapp">
           <a _ngcontent-serverapp-c34="" href="https://wa.me/+919344105565"
             ><img
